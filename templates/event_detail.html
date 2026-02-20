@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.title }} | Burundi Events Hub{% endblock %}
+{% block content %}
+<section class="event-hero">
+  <img src="{{ event.images[0] }}" alt="{{ event.title }}" />
+  <div>
+    <span class="badge">{{ event.category }}</span>
+    <h1>{{ event.title }}</h1>
+    <p>{{ event.date }} · {{ event.time }} · {{ event.location }}</p>
+  </div>
+</section>
+
+<section>
+  <h2>Event Details</h2>
+  <p>{{ event.description }}</p>
+  <div class="gallery" id="gallery">
+    {% for image in event.images %}
+      <img src="{{ image }}" alt="{{ event.title }} image {{ loop.index }}" class="gallery-item" />
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <h2>Related Events</h2>
+  <div class="grid cards">
+    {% for rel in related %}
+      <a class="card" href="{{ url_for('event_detail', event_id=rel.id, lang=lang) }}">
+        <img src="{{ rel.images[0] }}" alt="{{ rel.title }}" />
+        <div class="card-body">
+          <h3>{{ rel.title }}</h3>
+          <p>{{ rel.date }}</p>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<div id="lightbox" class="lightbox hidden"><img alt="Expanded media" id="lightboxImage" /></div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+{% endblock %}

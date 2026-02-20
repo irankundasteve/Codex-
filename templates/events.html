@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Events | Burundi Events Hub{% endblock %}
+{% block content %}
+<section>
+  <h1>All Events</h1>
+  <div class="grid cards">
+    {% for event in events %}
+      <a class="card" href="{{ url_for('event_detail', event_id=event.id, lang=lang) }}">
+        <img src="{{ event.images[0] }}" alt="{{ event.title }}" />
+        <div class="card-body">
+          <span class="badge">{{ event.category }}</span>
+          <h3>{{ event.title }}</h3>
+          <p>{{ event.date }} · {{ event.location }}</p>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

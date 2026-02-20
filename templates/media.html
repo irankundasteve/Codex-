@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Media | Burundi Events Hub{% endblock %}
+{% block content %}
+<section>
+  <h1>Highlights from past events</h1>
+  <div class="grid cards" id="mediaGrid">
+    {% for item in media_items %}
+      <div class="card media-card" data-category="{{ item.category }}">
+        <img src="{{ item.src }}" alt="{{ item.caption }}" class="gallery-item" />
+        <div class="card-body">
+          <span class="badge">{{ item.category }}</span>
+          <p>{{ item.caption }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+<div id="lightbox" class="lightbox hidden"><img alt="Expanded media" id="lightboxImage" /></div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+{% endblock %}

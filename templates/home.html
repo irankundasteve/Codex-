@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Home | Burundi Events Hub{% endblock %}
+{% block content %}
+<section class="hero">
+  <img src="{{ featured.images[0] }}" alt="Featured event" />
+  <div>
+    <h1>Discover upcoming local events in Burundi</h1>
+    <p>Find concerts, community gatherings, sports, and cultural experiences all in one place.</p>
+    <a class="btn" href="{{ url_for('events', lang=lang) }}">View Events</a>
+  </div>
+</section>
+
+<section class="search-filter">
+  <input type="search" id="searchInput" placeholder="Search events..." />
+  <select id="categoryFilter">
+    <option value="all">All categories</option>
+    {% for cat in categories %}
+      <option value="{{ cat }}">{{ cat }}</option>
+    {% endfor %}
+  </select>
+  <select id="sortFilter">
+    <option value="date_asc">Date (Soonest)</option>
+    <option value="date_desc">Date (Latest)</option>
+  </select>
+</section>
+
+<section>
+  <h2>Upcoming Events</h2>
+  <div class="grid cards" id="eventGrid">
+    {% for event in events %}
+    <a class="card" href="{{ url_for('event_detail', event_id=event.id, lang=lang) }}">
+      <img src="{{ event.images[0] }}" alt="{{ event.title }}" />
+      <div class="card-body">
+        <span class="badge">{{ event.category }}</span>
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.date }} · {{ event.time }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <h2>Latest Blog Highlights</h2>
+  <div class="grid cards">
+    {% for post in posts %}
+    <a class="card" href="{{ url_for('blog_post', post_id=post.id, lang=lang) }}">
+      <img src="{{ post.image }}" alt="{{ post.title[lang] }}" />
+      <div class="card-body">
+        <span class="badge">{{ post.category }}</span>
+        <h3>{{ post.title[lang] }}</h3>
+        <p>{{ post.excerpt[lang] }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.eventsApiUrl = "{{ url_for('events_api', lang=lang) }}";
+</script>
+<script src="{{ url_for('static', filename='js/events.js') }}"></script>
+{% endblock %}
