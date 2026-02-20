@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section><h1>Local Guides</h1><div class="grid cards">{% for g in guides %}<div class="card"><div class="card-body"><span class="badge">{{ g.type }}</span><h3>{{ g.title }}</h3><p>{{ g.body }}</p></div></div>{% endfor %}</div></section>{% endblock %}

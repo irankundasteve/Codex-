@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+  <h1>Blog & News</h1>
+  <form class="search-filter" method="get">
+    <input type="search" name="q" value="{{ q }}" placeholder="Search posts..." />
+    <select name="category">
+      <option value="all">All categories</option>
+      {% for cat in post_categories %}<option value="{{ cat }}" {% if category==cat %}selected{% endif %}>{{ cat }}</option>{% endfor %}
+    </select>
+    <button class="btn" type="submit">Filter</button>
+  </form>
+  <div class="grid cards" id="blogGrid">
+    {% for post in posts %}
+      <a class="card" href="{{ url_for('blog_post', lang=lang, slug=post.slug) }}">
+        <img src="{{ post.image }}" alt="{{ post.title_text }}" />
+        <div class="card-body"><span class="badge">{{ post.category }}</span><h3>{{ post.title_text }}</h3><p>{{ post.excerpt_text }}</p><small>{{ post.date }}</small></div>
+      </a>
+    {% endfor %}
+  </div>
+  <div class="pager">
+    {% if page > 1 %}<a class="btn" href="{{ url_for('blog_page', lang=lang, page=page-1, q=q, category=category) }}">Previous</a>{% endif %}
+    <span>Page {{ page }} / {{ total_pages }}</span>
+    {% if page < total_pages %}<a class="btn" href="{{ url_for('blog_page', lang=lang, page=page+1, q=q, category=category) }}">Next</a>{% endif %}
+  </div>
+</section>
+{% endblock %}

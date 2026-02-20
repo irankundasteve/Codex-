@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<article class="post">
+  <img src="{{ post.image }}" alt="{{ post.title_text }}" />
+  <h1>{{ post.title_text }}</h1>
+  <p>{{ post.date }} · {{ post.category }}</p>
+  <p>{{ post.content_text }}</p>
+</article>
+<section><h2>Related posts</h2><div class="grid cards">{% for rel in related %}<a class="card" href="{{ url_for('blog_post', lang=lang, slug=rel.slug) }}"><img src="{{ rel.image }}" alt="{{ rel.title_text }}" /><div class="card-body"><h3>{{ rel.title_text }}</h3></div></a>{% endfor %}</div></section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+  <h1>Highlights from past events</h1>
+  <div class="search-filter">
+    <select id="mediaCategory"><option value="all">All categories</option>{% for cat in media_categories %}<option value="{{ cat }}">{{ cat }}</option>{% endfor %}</select>
+    <select id="mediaType"><option value="all">All media</option><option value="image">Photos</option><option value="video">Videos</option></select>
+    <button class="btn" id="loadMore" type="button">Load More</button>
+  </div>
+  <div class="grid cards" id="mediaGrid">
+    {% for item in media_items %}
+      <div class="card media-card" data-type="{{ item.type }}" data-category="{{ item.category }}" data-src="{{ item.src }}">
+        <img src="{{ item.thumb if item.type == 'video' else item.src }}" alt="{{ item.caption }}" class="gallery-item" />
+        <div class="card-body"><span class="badge">{{ item.category }}</span><p>{{ item.caption }}</p></div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+<div id="lightbox" class="lightbox hidden"><img alt="Expanded media" id="lightboxImage" /><iframe id="lightboxVideo" class="hidden" allowfullscreen></iframe></div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/media.js') }}"></script><script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+  <h1>All Events</h1>
+  <div class="grid cards">
+    {% for event in events %}
+      <a class="card" href="{{ url_for('event_detail', lang=lang, slug=event.slug) }}">
+        <img src="{{ event.images[0] }}" alt="{{ event.title_text }}" />
+        <div class="card-body"><span class="badge">{{ event.category }}</span><h3>{{ event.title_text }}</h3><p>{{ event.date }} · {{ event.location }}</p></div>
+      </a>
+    {% endfor %}
+  </div>
+  <div class="pager">
+    {% if page > 1 %}<a class="btn" href="{{ url_for('events_page', lang=lang, page=page-1) }}">Previous</a>{% endif %}
+    <span>Page {{ page }} / {{ total_pages }}</span>
+    {% if page < total_pages %}<a class="btn" href="{{ url_for('events_page', lang=lang, page=page+1) }}">Next</a>{% endif %}
+  </div>
+</section>
+{% endblock %}

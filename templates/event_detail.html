@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="event-hero">
+  <img src="{{ event.images[0] }}" alt="{{ event.title_text }}" />
+  <div><span class="badge">{{ event.category }}</span><h1>{{ event.title_text }}</h1><p>{{ event.date }} · {{ event.time }} · {{ event.location }}</p></div>
+</section>
+<section><h2>Event Details</h2><p>{{ event.description_text }}</p>
+  <div class="gallery">{% for image in event.images %}<img src="{{ image }}" alt="{{ event.title_text }} image {{ loop.index }}" class="gallery-item" />{% endfor %}</div>
+</section>
+<section><h2>Related Events</h2><div class="grid cards">{% for rel in related %}<a class="card" href="{{ url_for('event_detail', lang=lang, slug=rel.slug) }}"><img src="{{ rel.images[0] }}" alt="{{ rel.title_text }}" /><div class="card-body"><h3>{{ rel.title_text }}</h3><p>{{ rel.date }}</p></div></a>{% endfor %}</div></section>
+<div id="lightbox" class="lightbox hidden"><img alt="Expanded media" id="lightboxImage" /><iframe id="lightboxVideo" class="hidden" allowfullscreen></iframe></div>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"{{ event.title_text }}","startDate":"{{ event.date }}T{{ event.time }}","location":{"@type":"Place","name":"{{ event.location }}"}}</script>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+  <h1>Contact</h1>
+  {% if sent %}<p class="success">Thanks! Your message has been sent.</p>{% endif %}
+  <form method="post" class="contact-form">
+    <input type="text" name="name" placeholder="Name" required />
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="tel" name="phone" placeholder="Phone (optional)" />
+    <textarea name="message" placeholder="Message" required></textarea>
+    <button class="btn" type="submit">Send</button>
+  </form>
+  <p>Instagram · Facebook · WhatsApp</p>
+</section>
+{% endblock %}

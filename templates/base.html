@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ seo.title }}</title>
+  <meta name="description" content="{{ seo.description }}" />
+  <meta property="og:title" content="{{ seo.title }}" />
+  <meta property="og:description" content="{{ seo.description }}" />
+  <meta property="og:image" content="{{ seo.og_image }}" />
+  <meta property="og:url" content="{{ seo.url }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="{{ seo.url }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">Burundi Events Hub</div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">☰</button>
+    <nav id="mainNav" class="main-nav">
+      <a href="{{ url_for('home', lang=lang) }}">Home</a>
+      <a href="{{ url_for('events_page', lang=lang) }}">Events</a>
+      <a href="{{ url_for('blog_page', lang=lang) }}">Blog</a>
+      <a href="{{ url_for('media_page', lang=lang) }}">Media</a>
+      <a href="{{ url_for('about_page', lang=lang) }}">About</a>
+      <a href="{{ url_for('contact_page', lang=lang) }}">Contact</a>
+      <a href="{{ url_for('sponsors_page', lang=lang) }}">Sponsors</a>
+      <a href="{{ url_for('guides_page', lang=lang) }}">Guides</a>
+      <a href="{{ url_for('faqs_page', lang=lang) }}">FAQs</a>
+    </nav>
+    <div class="language-switcher">
+      <a href="{{ request.path|replace('/fr/','/rn/')|replace('/fr','/rn') }}" class="chip {% if lang == 'rn' %}active{% endif %}">Kirundi</a>
+      <a href="{{ request.path|replace('/rn/','/fr/')|replace('/rn','/fr') }}" class="chip {% if lang == 'fr' %}active{% endif %}">Français</a>
+    </div>
+  </header>
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <p>Follow: <a href="#">Instagram</a> · <a href="#">Facebook</a> · <a href="#">YouTube</a></p>
+    <p>Contact: info@burundieventshub.bi · +257 00 00 00</p>
+    <p><a href="{{ url_for('home', lang=lang) }}">Home</a> · <a href="{{ url_for('events_page', lang=lang) }}">Events</a> · <a href="{{ url_for('blog_page', lang=lang) }}">Blog</a> · <a href="{{ url_for('contact_page', lang=lang) }}">Contact</a></p>
+    <p>© {{ current_year }} Burundi Events Hub</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section><h1>Sponsors & Partners</h1><div class="grid cards">{% for s in sponsors %}<a class="card" href="{{ s.url }}"><div class="card-body"><h3>{{ s.name }}</h3><p>{{ s.description }}</p></div></a>{% endfor %}</div></section>{% endblock %}

@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block content %}<section><h1>FAQs</h1><input id="faqSearch" placeholder="Search questions..."><div>{% for f in faqs %}<details class="faq-item"><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>{% endfor %}</div></section>{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/faqs.js') }}"></script>{% endblock %}
