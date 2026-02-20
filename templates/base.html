@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Burundi Events Hub{% endblock %}</title>
+  <meta name="description" content="Discover upcoming local events in Burundi" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">Burundi Events Hub</div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">☰</button>
+    <nav id="mainNav" class="main-nav">
+      <a href="{{ url_for('home', lang=lang) }}">Home</a>
+      <a href="{{ url_for('events', lang=lang) }}">Events</a>
+      <a href="{{ url_for('blog', lang=lang) }}">Blog</a>
+      <a href="{{ url_for('media', lang=lang) }}">Media</a>
+      <a href="{{ url_for('about', lang=lang) }}">About</a>
+      <a href="{{ url_for('contact', lang=lang) }}">Contact</a>
+    </nav>
+    <div class="language-switcher">
+      <a href="{{ request.path }}?lang=rn" class="chip {% if lang == 'rn' %}active{% endif %}">Kirundi</a>
+      <a href="{{ request.path }}?lang=fr" class="chip {% if lang == 'fr' %}active{% endif %}">Français</a>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>Follow: <a href="#">Instagram</a> · <a href="#">Facebook</a> · <a href="#">YouTube</a></p>
+    <p>Contact: info@burundieventshub.bi · +257 00 00 00</p>
+    <p>© {{ current_year }} Burundi Events Hub</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

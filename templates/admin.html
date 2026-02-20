@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard | Burundi Events Hub{% endblock %}
+{% block content %}
+<section>
+  <h1>Admin Dashboard (English)</h1>
+  <div class="stats">
+    <div class="stat"><h3>{{ events|length }}</h3><p>Total events</p></div>
+    <div class="stat"><h3>{{ posts|length }}</h3><p>Total posts</p></div>
+    <div class="stat"><h3>{{ media_items|length }}</h3><p>Total media</p></div>
+  </div>
+  <p>Manage events, blog posts, categories, media, and analytics from a central panel.</p>
+</section>
+{% endblock %}
